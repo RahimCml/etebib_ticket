@@ -1,4 +1,4 @@
-import 'package:etebib_ticket/pages/home_page.dart';
+import 'package:etebib_ticket/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
