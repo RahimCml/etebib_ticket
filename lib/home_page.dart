@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   void _onItemTapped (int index) {
     setState(() {
       _selectedIntex = index;
-      print('index $_selectedIntex');
+      // print('index $_selectedIntex');
     });
   }
   @override
@@ -43,7 +43,6 @@ class _HomePageState extends State<HomePage> {
         onTap: _onItemTapped,
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.blue,
-
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.biotech_outlined), label: 'Laboratoriya' ),

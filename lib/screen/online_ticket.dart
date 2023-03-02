@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class OnlineTicketScreen extends StatefulWidget {
   const OnlineTicketScreen({super.key});
@@ -10,10 +8,48 @@ class OnlineTicketScreen extends StatefulWidget {
 }
 
 class _OnlineTicketScreenState extends State<OnlineTicketScreen> {
+
+  dynamic _selectedHospital;
+
+  final List<String> _hospitals = ['5 nomreli', '6 nomreli', 'Semashka'];
+
+  void _hospitalSelected () {
+    if(_selectedHospital) {
+    }
+  }
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Online randevu'),
-    );
+    return Scaffold(
+      body: Center(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 100),
+        child: Column(
+          children: [
+            DropdownButton(
+              value: _selectedHospital,
+              items: _hospitals
+                  .map(
+                    (option) => DropdownMenuItem(
+                      child: Text(option),
+                      value: option,
+                    ),
+                  )
+                  .toList(),
+              onChanged: (newValue) {
+                setState(() {
+                  _selectedHospital = newValue;
+                });
+              },
+              hint: const Text('Hospital secin'),
+            ),
+            _hospitalWidget()
+          ],
+        ),
+      ),
+    )
+  );
+  }
+  Widget _hospitalWidget() {
+    return _selectedHospital != null ? Text('$_selectedHospital') : const Text('');
   }
 }
