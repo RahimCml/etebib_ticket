@@ -12,12 +12,10 @@ class _OnlineTicketScreenState extends State<OnlineTicketScreen> {
   dynamic _selectedHospital;
   dynamic _selectedDistrict;
   dynamic _selectedDoctor;
+  int index = 0;
   bool checkData= false;
 
-
-  final List<String> _hospitals = ['5 sayli', '3 sayli', '1 sayli'];
   final List<String> _districts = ['Nerimanov', 'Sabuncu', 'Nesimi'];
-  final List<Object> _doctors = ['Dr. Abbas Abbasov', 'Dr. Fatime Asadova', 'Dr. Ilyas Xuduyev'];
   final dynamic _districtsData = {
       'Sabuncu': [{
         'name': '3 sayli ',
@@ -76,7 +74,6 @@ class _OnlineTicketScreenState extends State<OnlineTicketScreen> {
               const Text('Rayon'),
               _districtDrop(),
               checkData == true ? _hospitalDrop() : const Text('Rayon secin'),
-              // _hospitalWidget()
             ],
           ),
         ),
@@ -98,14 +95,13 @@ class _OnlineTicketScreenState extends State<OnlineTicketScreen> {
             onChanged: (newValue) {
               setState(() {
               _selectedDistrict = newValue;
-              var i = 0;
-              while (i < _districtsData[_selectedDistrict].length) {
-                if(_districtsData[_selectedDistrict][i]['location'] == _selectedDistrict) {
+              while (index < _districtsData[_selectedDistrict].length) {
+                if(_districtsData[_selectedDistrict][index]['location'] == _selectedDistrict) {
                 checkData = true;
               }else {
                 checkData = false;
               }
-                i += 1;
+                index += 1;
               }
               });
             },
@@ -116,19 +112,18 @@ class _OnlineTicketScreenState extends State<OnlineTicketScreen> {
     return  Column(
       children: [
         const Text('* Xestexana'),
-        DropdownButton(
+        DropdownButton<String>(
           value: _selectedHospital,
-          items: _hospitals
-            .map(
-              (option) => DropdownMenuItem(
-              child: Text(option),
-              value: option,
+          items: _districtsData[_selectedDistrict]!
+            .map<DropdownMenuItem<String>>(
+              (option) => DropdownMenuItem<String>(
+              child: Text(option['name']),
+              value: option['name'],
               ),
               )
               .toList(),
                 onChanged: (newValue) {
                   setState(() {
-                  // print('${_hospitalss['name']['besNomreli']}');
                   _selectedHospital = newValue;
                 });
               },
